@@ -1,0 +1,54 @@
+[
+  {
+    "brand": "Apple",
+    "model": "iPhone 15 Pro Max",
+    "price": 1199,
+    "specifications": {
+      "ram": "8GB",
+      "storage": "512GB",
+      "battery": "4500mAh",
+      "processor": "A17 Bionic",
+      "display": "6.7-inch Super Retina XDR OLED"
+    },
+    "image": "/uploads/iphone15promax.jfif"
+  },
+  {
+    "brand": "Samsung",
+    "model": "Galaxy S24 Ultra",
+    "price": 1299,
+    "specifications": {
+      "ram": "12GB",
+      "storage": "1TB",
+      "battery": "5000mAh",
+      "processor": "Snapdragon 8 Gen 3",
+      "display": "6.8-inch Dynamic AMOLED 2X"
+    },
+    "image": "/uploads/s24ultra.jpg"
+  },
+  {
+    "brand": "Google",
+    "model": "Pixel 8 Pro",
+    "price": 999,
+    "specifications": {
+      "ram": "12GB",
+      "storage": "256GB",
+      "battery": "5050mAh",
+      "processor": "Google Tensor G3",
+      "display": "6.7-inch LTPO OLED"
+    },
+    "image": "/uploads/google-pixel-8-pro.png"
+  },
+  {
+    "brand": "OnePlus",
+    "model": "OnePlus 12",
+    "price": 899,
+    "specifications": {
+      "ram": "16GB",
+      "storage": "512GB",
+      "battery": "5500mAh",
+      "processor": "Snapdragon 8 Gen 3",
+      "display": "6.82-inch AMOLED"
+    },
+    "image": "/uploads/OnePlus12.png"
+  }
+]
