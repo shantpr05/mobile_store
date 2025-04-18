@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom'; 
+import ReactGA from 'react-ga4';
 import api from '../api/axios';
 
 const ProductDetails = () => {
@@ -9,7 +10,17 @@ const ProductDetails = () => {
 
   useEffect(() => {
     api.get(`/products/${id}`)
-      .then(res => setProduct(res.data.product))
+      .then(res => {
+        const productData = res.data.product;
+        setProduct(productData);
+        
+        ReactGA.event({
+          category: 'Product',
+          action: 'Viewed Product',
+          label: `${productData.brand} ${productData.model}`,
+          value: productData.price, // optional
+        });
+      })
       .catch(err => console.error('Error loading product', err));
   }, [id]);
 
