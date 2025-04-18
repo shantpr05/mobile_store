@@ -9,7 +9,7 @@ const Header = () => {
 
   const handleLogout = async () => {
     await api.get('/logout');
-    setUser(null); // update context
+    setUser(null); 
     navigate('/');
   };
 
@@ -17,9 +17,17 @@ const Header = () => {
     <nav className="navbar navbar-dark bg-dark px-4">
       <Link to="/" className="navbar-brand">Mobile Store</Link>
 
-      <div className="ms-auto d-flex gap-2">
+      <div className="ms-auto d-flex gap-2 align-items-center">
         <Link to="/products/new" className="btn btn-success">Add Product</Link>
-        <Link to="/login" className="btn btn-outline-light">Login</Link>
+      
+        {user ? (
+          <>
+            <span className="text-white">Welcome, {user.name}</span>
+            <button onClick={handleLogout} className="btn btn-outline-light">Logout</button>
+          </>
+        ) : (
+          <Link to="/login" className="btn btn-outline-light">Login</Link>
+        )}
       </div>
     </nav>
   );
