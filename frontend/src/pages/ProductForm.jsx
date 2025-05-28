@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import api from '../api/axios';
+import { AuthContext } from '../context/AuthContext';
 
 const ProductForm = () => {
   const [form, setForm] = useState({
@@ -13,10 +15,11 @@ const ProductForm = () => {
       storage: '',
       battery: '',
       processor: '',
-      display: '', 
+      display: '',
     },
   });
 
+  const { user } = useContext(AuthContext);
   const { id } = useParams();
   const navigate = useNavigate();
   const isEdit = Boolean(id);
@@ -27,7 +30,7 @@ const ProductForm = () => {
         .then(res => setForm(res.data.product))
         .catch(err => console.error('Error loading product', err));
     }
-  }, [id]);
+  }, [id, isEdit]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -61,8 +64,18 @@ const ProductForm = () => {
     }
   };
 
+  // ❗ Block non-admins
+  if (user?.role !== 'admin') {
+    return <div className="container mt-5 text-danger">Access denied – Admins only</div>;
+  }
+
   return (
     <div className="container mt-5" style={{ maxWidth: '600px' }}>
+      <Helmet>
+        <title>{isEdit ? 'Edit Product' : 'Add New Product'} – Mobile Store</title>
+        <meta name="description" content={isEdit ? 'Update existing product details.' : 'Create a new mobile product in the store.'} />
+      </Helmet>
+
       <h3>{isEdit ? 'Edit Product' : 'Add New Product'}</h3>
       <form onSubmit={handleSubmit}>
         <input name="brand" value={form.brand} onChange={handleChange} className="form-control mb-2" placeholder="Brand" required />
@@ -75,8 +88,8 @@ const ProductForm = () => {
         <input name="storage" value={form.specifications.storage} onChange={handleChange} className="form-control mb-2" placeholder="Storage" />
         <input name="battery" value={form.specifications.battery} onChange={handleChange} className="form-control mb-2" placeholder="Battery" />
         <input name="processor" value={form.specifications.processor} onChange={handleChange} className="form-control mb-2" placeholder="Processor" />
-        <input  name="display"  value={form.specifications.display}  onChange={handleChange}  className="form-control mb-2"  placeholder="Display"
-/>
+        <input name="display" value={form.specifications.display} onChange={handleChange} className="form-control mb-2" placeholder="Display" />
+
         <button className="btn btn-success w-100 mt-3">{isEdit ? 'Update' : 'Create'} Product</button>
       </form>
     </div>

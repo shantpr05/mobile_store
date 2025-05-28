@@ -1,24 +1,27 @@
-import { useEffect, useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom'; 
+import { useEffect, useState, useContext } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import ReactGA from 'react-ga4';
 import api from '../api/axios';
+import { AuthContext } from '../context/AuthContext';
 
 const ProductDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
   const [product, setProduct] = useState(null);
-  const navigate = useNavigate(); 
 
   useEffect(() => {
     api.get(`/products/${id}`)
       .then(res => {
         const productData = res.data.product;
         setProduct(productData);
-        
+
         ReactGA.event({
           category: 'Product',
           action: 'Viewed Product',
           label: `${productData.brand} ${productData.model}`,
-          value: productData.price, // optional
+          value: productData.price,
         });
       })
       .catch(err => console.error('Error loading product', err));
@@ -41,10 +44,15 @@ const ProductDetails = () => {
 
   return (
     <div className="container mt-5">
+      <Helmet>
+        <title>{product.model} – Mobile Store</title>
+        <meta name="description" content={`Details about ${product.brand} ${product.model}, featuring ${product.specifications?.ram} RAM, ${product.specifications?.storage} storage, and more.`} />
+      </Helmet>
+
       <h2>{product.model}</h2>
       <img
         src={product.image || '/placeholder.png'}
-        alt={product.name}
+        alt={product.model}
         className="img-fluid mb-3"
         style={{ maxHeight: '300px' }}
       />
@@ -58,14 +66,17 @@ const ProductDetails = () => {
         <li className="list-group-item"><strong>Processor:</strong> {product.specifications?.processor}</li>
       </ul>
 
-      <div className="d-flex gap-2">
-        <Link to={`/products/edit/${product._id}`} className="btn btn-warning">
-          Edit
-        </Link>
-        <button className="btn btn-danger" onClick={handleDelete}>
-          Delete
-        </button>
-      </div>
+      {/* Admin-only buttons */}
+      {user?.role === 'admin' && (
+        <div className="d-flex gap-2">
+          <Link to={`/products/edit/${product._id}`} className="btn btn-warning">
+            Edit
+          </Link>
+          <button className="btn btn-danger" onClick={handleDelete}>
+            Delete
+          </button>
+        </div>
+      )}
     </div>
   );
 };

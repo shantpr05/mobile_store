@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import api from '../api/axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,8 +15,6 @@ const Register = () => {
     try {
       const res = await api.post('/register', { name, email, password });
       console.log('Registration successful:', res.data);
-
-      // Redirect to login
       navigate('/login');
     } catch (err) {
       console.error('Registration failed:', err.response?.data || err.message);
@@ -25,6 +24,11 @@ const Register = () => {
 
   return (
     <div className="container mt-5" style={{ maxWidth: '500px' }}>
+      <Helmet>
+        <title>Register – Mobile Store</title>
+        <meta name="description" content="Create a new Mobile Store account to browse and manage products." />
+      </Helmet>
+
       <h3 className="mb-3">Register</h3>
       <form onSubmit={handleSubmit}>
         <div className="form-group mb-3">
