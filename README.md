@@ -79,8 +79,8 @@ npm install
 npm run dev
 
 
-See also:
+## 📎 Additional Documentation
 
-- [ACCESSIBILITY.md](./ACCESSIBILITY.md)
-- [TRACKING.md](./TRACKING.md)
-- [SECURITY.md](./SECURITY.md)
+- 📄 [Accessibility & SEO Practices](./ACCESSIBILITY.md)
+- 🔍 [Tracking & Privacy Compliance](./TRACKING.md)
+- 🔒 [Security & Threat Mitigations](./SECURITY.md)
