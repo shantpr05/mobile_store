@@ -81,6 +81,6 @@ npm run dev
 
 ## 📎 Additional Documentation
 
-- 📄 [Accessibility & SEO Practices](ACCESSIBILITY.md)
-- 🔍 [Tracking & Privacy Compliance](TRACKING.md)
-- 🔒 [Security & Threat Mitigations](SECURITY.md)
+- 📄 [Accessibility & SEO Practices](https://github.com/shantpr05/mobile_store/blob/main/ACCESSIBILITY.md)
+- 🔍 [Tracking & Privacy Compliance](https://github.com/shantpr05/mobile_store/blob/main/TRACKING.md)
+- 🔒 [Security & Threat Mitigations](https://github.com/shantpr05/mobile_store/blob/main/SECURITY.md)
