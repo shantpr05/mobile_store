@@ -81,6 +81,6 @@ npm run dev
 
 ## 📎 Additional Documentation
 
-- 📄 [Accessibility & SEO Practices](./ACCESSIBILITY.md)
-- 🔍 [Tracking & Privacy Compliance](./TRACKING.md)
-- 🔒 [Security & Threat Mitigations](./SECURITY.md)
+- [ACCESSIBILITY.md](ACCESSIBILITY.md)
+- [TRACKING.md](TRACKING.md)
+- [SECURITY.md](SECURITY.md)
